@@ -1,24 +1,24 @@
 // ==========================================
-// 1. LES IMPORTS (Charger les dépendances)
+// 1. IMPORTS (Loading Dependencies & Assets)
 // ==========================================
 
-// En React/Vite, on importe les images comme des variables JavaScript.
-// Cela permet à l'outil de build d'optimiser le chemin d'accès de l'image.
+// In React (with tools like Vite/Webpack), we import local images like JavaScript variables.
+// This lets the bundler optimize image paths and handle browser caching automatically.
 import reactImg from "./assets/react-core-concepts.png";
 
-// Import nommé avec des accolades { } : on récupère la donnée exportée depuis data.js
+// Named import using curly braces { }: retrieves exported data from the data.js file.
 import { CORE_CONCEPTS } from "./data.js";
 
 // ==========================================
-// 2. DONNÉES ET FONCTIONS UTILITAIRES (Hors React)
+// 2. DATA & UTILITY FUNCTIONS (Standard JS)
 // ==========================================
 
-// Un tableau simple contenant des adjectifs
+// A plain JavaScript array containing adjectives
 const reactDescriptions = ['Fundamental', 'Crucial', 'Core'];
 
 /**
- * Fonction JavaScript pure (sans React).
- * Génère un nombre entier aléatoire entre 0 et `max` (inclus).
+ * Pure JavaScript utility function (non-React).
+ * Generates a random integer between 0 and `max` (inclusive).
  * @param {number} max 
  */
 function genRandomInt(max) {
@@ -26,27 +26,27 @@ function genRandomInt(max) {
 }
 
 // ==========================================
-// 3. COMPOSANT : Header
+// 3. COMPONENT: Header
 // ==========================================
 
 /**
- * Un composant React est simplement une fonction JS qui retourne du code JSX (du HTML dynamic).
- * Règle importante : Son nom DOIT toujours commencer par une MAJUSCULE.
+ * A React component is simply a JS function that returns JSX (dynamic HTML-like code).
+ * IMPORTANT RULE: Component names MUST always start with a CAPITAL letter!
  */
 function Header() {
-  // Sélectionne un mot au hasard dans le tableau 'reactDescriptions' (index 0, 1 ou 2)
+  // Selects a random adjective from the 'reactDescriptions' array (index 0, 1, or 2)
   const description = reactDescriptions[genRandomInt(2)];
 
   return (
     <header>
       {/* 
-        Dans le JSX, les accolades { } permettent d'injecter des variables ou expressions JS.
-        Ici, 'src={reactImg}' utilise la variable importée au début du fichier.
+        In JSX, curly braces { } let you inject dynamic JavaScript expressions.
+        Here, 'src={reactImg}' binds the image variable imported at the top of the file.
       */}
       <img src={reactImg} alt="Stylized atom" />
       <h1>React Essentials</h1>
       <p>
-        {/* Affichage dynamique du mot tiré au sort */}
+        {/* Dynamic rendering of the randomly selected adjective */}
         {description} React concepts you will need for almost any app you are
         going to build!
       </p>
@@ -55,14 +55,14 @@ function Header() {
 }
 
 // ==========================================
-// 4. COMPOSANT : CoreConcept (Les Props)
+// 4. COMPONENT: CoreConcept (Handling Props)
 // ==========================================
 
 /* 
-  --- NOTE PÉDAGOGIQUE SUR LES PROPS ---
-  Les "props" (propriétés) sont les arguments qu'on passe à un composant pour le rendre configurable et réutilisable.
+  --- PEDAGOGICAL NOTE ON PROPS ---
+  "Props" (Short for properties) are custom arguments passed into a component to make it configurable and reusable.
 
-  Version classique (sans destructuring) :
+  Traditional approach (without object destructuring):
   
   function CoreConcept(props) {
     return (
@@ -76,9 +76,11 @@ function Header() {
 */
 
 /**
- * Version moderne avec le DESTRUCTURING :
- * Au lieu de recevoir un gros objet `props` puis d'écrire `props.title`, `props.image`, etc.,
- * on "déballe" directement les clés de l'objet dans la liste des paramètres : { image, title, description }.
+ * Modern approach using DESTRUCTURING:
+ * Instead of receiving a single `props` object and repeating `props.title`, `props.image`, etc.,
+ * we unpack the specific keys directly in the function parameter list: { image, title, description }.
+ * 
+ * CRITICAL LINK: The parameter names MUST EXACTLY match the property keys coming from data.js!
  */
 function CoreConcept({ image, title, description }) {
   return (
@@ -91,16 +93,16 @@ function CoreConcept({ image, title, description }) {
 }
 
 // ==========================================
-// 5. COMPOSANT PRINCIPAL : App
+// 5. ROOT COMPONENT: App
 // ==========================================
 
 /**
- * C'est le composant racine de l'application, celui qui assemble tous les autres composants.
+ * The main container component that composes the entire user interface.
  */
 function App() {
   return (
     <div>
-      {/* On réutilise notre composant Header comme s'il s'agissait d'une balise HTML personnalisée */}
+      {/* Reusing our custom Header component like a self-closing HTML tag */}
       <Header />
 
       <main>
@@ -108,8 +110,8 @@ function App() {
           <h2>Core Concepts</h2>
           <ul>
             {/* 
-              MÉTHODE 1 : Passage de props explicite (clé par clé).
-              On va chercher chaque valeur dans le 1er objet du tableau `CORE_CONCEPTS` (index 0).
+              METHOD 1: Explicit prop assignment (key-by-key).
+              Pulling values individually from the 1st object in the `CORE_CONCEPTS` array (index 0).
             */}
             <CoreConcept
               title={CORE_CONCEPTS[0].title}
@@ -118,9 +120,10 @@ function App() {
             />
 
             {/* 
-              MÉTHODE 2 : Le Spread Operator (`...`).
-              Astuce JS : Si le nom de vos props (`image`, `title`, `description`) correspond EXACTEMENT 
-              aux clés de votre objet, `...CORE_CONCEPTS[1]` va déballer et passer toutes les clés d'un coup !
+              METHOD 2: The Spread Operator (`...`).
+              JavaScript Syntax Trick: If the keys in your object (image, title, description) 
+              MATCH the prop names expected by the component, `{...CORE_CONCEPTS[1]}` 
+              automatically unpacks and passes all properties at once!
             */}
             <CoreConcept {...CORE_CONCEPTS[1]} />
             <CoreConcept {...CORE_CONCEPTS[2]} />
@@ -134,5 +137,5 @@ function App() {
   );
 }
 
-// On exporte le composant App pour qu'il puisse être injecté dans la page HTML (généralement dans main.jsx ou index.js)
+// Exporting the App component so it can be mounted into the real DOM (usually in main.jsx)
 export default App;
