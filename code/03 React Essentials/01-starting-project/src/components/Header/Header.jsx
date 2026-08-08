@@ -1,8 +1,9 @@
-// Import local image assets. The bundler (Vite/Webpack) handles the path resolution.
-import reactImg from "../assets/react-core-concepts.png";
+// Import local image & styling assets. The bundler (Vite/Webpack) handles the path resolution.
+import reactImg from "../../assets/react-core-concepts.png";
+import "./Header.css";
 
 // ==========================================
-// 2. DATA & UTILITY FUNCTIONS (Standard JS)
+// DATA & UTILITY FUNCTIONS (Standard JS)
 // ==========================================
 
 // A plain JavaScript array of adjectives for the header.

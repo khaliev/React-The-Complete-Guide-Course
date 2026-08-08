@@ -1,10 +1,11 @@
 // ==========================================
 // IMPORTS (Loading Dependencies & Assets)
 // ==========================================
-import Header from "./components/Header.jsx";
+import Header from "./components/Header/Header.jsx";
+import CoreConcept from "./components/CoreConcept.jsx";
 // Import the data array from the external file.
 import { CORE_CONCEPTS } from "./data.js";
-import CoreConcept from "./components/CoreConcept.jsx";
+
 
 
 // ==========================================
