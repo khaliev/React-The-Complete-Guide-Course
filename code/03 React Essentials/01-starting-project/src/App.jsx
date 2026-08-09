@@ -5,6 +5,7 @@ import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcept.jsx";
 // Import the data array from the external file.
 import { CORE_CONCEPTS } from "./data.js";
+import TabButton from "./components/TabButton.jsx";
 
 
 
@@ -67,7 +68,7 @@ function App() {
   Using 'index' as a key can cause visual bugs if the list items are reordered, filtered, or deleted.
 
   In human language :
-  "Take my CORE_CONCEPTS array, map through every concept, give it a unique key
+  "Take my CORE_CONCEPTS array, map through every concept, give it a unique key/ID
   (here (concept.title, because title is unique, it's like a "badge number"),
   spread its data {...concept}, and render a <CoreConcept/> for each one!
 */}
@@ -75,6 +76,16 @@ function App() {
   <CoreConcept key={concept.title} {...concept}/>
 ))}
           </ul>
+        </section>
+        <section id="examples">
+          <h2>Examples</h2>
+          <menu>
+           <TabButton>Components</TabButton>
+           <TabButton>JSX</TabButton>
+           <TabButton>Props</TabButton>
+           <TabButton>State</TabButton>
+
+          </menu>
         </section>
 
         <h2>Time to get started!</h2>
@@ -112,7 +123,8 @@ export default App;
   }
 ];
 
-  // 1. Added curly braces { } for destructuring props
+  // 1. Added curly braces {} for destructuring props
+  
 export function SkillCard({ name, level, category }) {
   return (
     <li>
@@ -130,6 +142,7 @@ function App() {
       <h2>Skills & Technologies</h2>
       <ul>
         // 2. Fixed JSX component syntax and spread operator {...skill}
+
         {SKILLS.map((skill) => (
           <SkillCard key="{skill.id}" {...skill}/>
         ))}
