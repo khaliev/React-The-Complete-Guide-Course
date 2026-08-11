@@ -31,5 +31,5 @@ export default function TabButton({ children }) {
     <img src="icon.png" alt="icon" />
     <span>JSX Core</span>
   </TabButton>
-  --> Renders HTML: <li><button><img ... /><span>JSX Core</span></button></li>
+  --> Renders HTML: <li><button><img ... /><span>JSX Core</span></button></li> 
 */}
