@@ -6,13 +6,16 @@
 // It automatically receives whatever content (text, HTML, or other components)
 // you wrap INSIDE the opening and closing tags when using <TabButton>...</TabButton>.
 export default function TabButton({ children }) {
+  function handleClick() {
+    console.log("Hello!")
+  }
   return (
     <li>
       {/* 
         The content passed between <TabButton>Content Here</TabButton> 
         will be injected right here inside the <button> tag.
       */}
-      <button>{children}</button>
+      <button onClick={handleClick}>{children}</button>
     </li>
   );
 }
