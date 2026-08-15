@@ -18,6 +18,11 @@ import TabButton from "./components/TabButton.jsx";
  * This demonstrates three different ways to render the list of concepts.
  */
 function App() {
+  function handleSelect(selectedButton) {
+    // selectedButton => our 4 id's 'components', 'jsx', 'props', 'state'
+console.log("Hello - selected! ")
+  }
+
   return (
     <div>
       {/* Reusing our custom Header component */}
@@ -75,15 +80,16 @@ function App() {
 {CORE_CONCEPTS.map((concept) => (
   <CoreConcept key={concept.title} {...concept}/>
 ))}
+
           </ul>
         </section>
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-           <TabButton>Components</TabButton>
-           <TabButton>JSX</TabButton>
-           <TabButton>Props</TabButton>
-           <TabButton>State</TabButton>
+           <TabButton onSelect={() => handleSelect('components')}>Components</TabButton>
+           <TabButton onSelect={() => handleSelect('jsx')}>JSX</TabButton>
+           <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
+           <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
 
           </menu>
         </section>
